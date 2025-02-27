@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import LinearGradient from 'react-native-linear-gradient';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useDispatch } from 'react-redux';
 import { useShare } from '../hooks/useShare';
 import AnswerButton from '../components/UI/AnswerButton';
@@ -23,6 +23,8 @@ const GameResultScreen = () => {
     const { level, correctAnswer, isCorrect } = route.params || {};
     const dispatch = useDispatch();
     const shareMessage = useShare();
+    const maxLevel = 10;
+    const isNextLevelAvailable = isCorrect && level < maxLevel;
 
     useVibrationOnWrongAnswer(isCorrect);
 
@@ -33,11 +35,11 @@ const GameResultScreen = () => {
     };
 
     const handleNextOrTry = () => {
-        if (isCorrect) {
+        if (!isCorrect) {
+            navigation.replace('Game', { riddleId: level });
+        } else if (level < maxLevel) {
             dispatch(setCurrentLevel(level + 1));
             navigation.replace('Game', { riddleId: level + 1 });
-        } else {
-            navigation.replace('Game', { riddleId: level });
         }
     };
 
@@ -67,7 +69,7 @@ const GameResultScreen = () => {
                         outerContainerStyle={styles.gradientLabelOuter}
                         innerContainerStyle={styles.gradientLabelInner}
                     >
-                        {`1 LEVEL ${isCorrect ? 'PASSED' : 'NOT PASSED'}`}
+                        {`${level} LEVEL ${isCorrect ? 'PASSED' : 'NOT PASSED'}`}
                     </ResultLabel>
 
                     <LinearGradient
@@ -120,9 +122,10 @@ const GameResultScreen = () => {
 
                     <ResultButtons
                         isCorrect={isCorrect}
-                        onNextOrTry={handleNextOrTry}
+                        onNextOrTry={isNextLevelAvailable ? handleNextOrTry : null}
                         onGoHome={handleGoHome}
                         onShare={handleShare}
+                        nextButtonDisabled={!isNextLevelAvailable}
                     />
                 </SafeAreaView>
             </ImageBackground>

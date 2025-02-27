@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import { View, StyleSheet, StyleSheet as RNStyleSheet } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import HomeButton from './HomeButton';
 import ShareButton from './ShareButton';
 import GameButton from './GameButton';
 
-const ResultButtons = ({ isCorrect, onNextOrTry, onGoHome, onShare }) => {
+const ResultButtons = ({ isCorrect, onNextOrTry, onGoHome, onShare, nextButtonDisabled }) => {
     return (
         <View style={styles.buttonsBlockContainer}>
             <LinearGradient
@@ -19,13 +19,17 @@ const ResultButtons = ({ isCorrect, onNextOrTry, onGoHome, onShare }) => {
                         colors={['#9A5310', '#341C05']}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}
-                        style={styles.absoluteFill}
+                        style={RNStyleSheet.absoluteFill}
                     />
                     <View style={styles.buttonsBlockContent}>
                         <GameButton
                             text={isCorrect ? 'NEXT LEVEL' : 'TRY AGAIN'}
-                            onPress={onNextOrTry}
-                            style={styles.mainActionButton}
+                            onPress={nextButtonDisabled ? null : onNextOrTry}
+                            disabled={nextButtonDisabled}
+                            style={[
+                                styles.mainActionButton,
+                                nextButtonDisabled && styles.disabledButton,
+                            ]}
                         />
                         {isCorrect ? (
                             <View style={styles.bottomRow}>
@@ -39,7 +43,7 @@ const ResultButtons = ({ isCorrect, onNextOrTry, onGoHome, onShare }) => {
                                 />
                             </View>
                         ) : (
-                            <View style={styles.bottomRowCenter}>
+                            <View style={[styles.bottomRow, styles.centerBottomRow]}>
                                 <HomeButton
                                     onPress={onGoHome}
                                     containerStyle={styles.homeButtonContainer}
@@ -76,17 +80,17 @@ const styles = StyleSheet.create({
     mainActionButton: {
         width: '100%',
     },
+    disabledButton: {
+        opacity: 0.5,
+    },
     bottomRow: {
         flexDirection: 'row',
         gap: 16,
         justifyContent: 'center',
         alignItems: 'center',
     },
-    bottomRowCenter: {
-        flexDirection: 'row',
-        gap: 16,
+    centerBottomRow: {
         justifyContent: 'center',
-        alignItems: 'center',
     },
     shareButtonContainer: {
         borderRadius: 20,
@@ -96,9 +100,6 @@ const styles = StyleSheet.create({
         width: 75,
         height: 75,
         borderRadius: 20,
-    },
-    absoluteFill: {
-        ...StyleSheet.absoluteFillObject,
     },
 });
 
