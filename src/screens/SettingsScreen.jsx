@@ -24,6 +24,7 @@ const SettingsScreen = () => {
 
     const handleStartOver = () => {
         dispatch(resetProgress());
+        navigation.navigate('Main');
     };
 
     const handleToggleVibration = () => {
