@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, StyleSheet as RNStyleSheet } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import LinearGradient from 'react-native-linear-gradient';
+
 import HomeButton from './HomeButton';
 import ShareButton from './ShareButton';
 import GameButton from './GameButton';

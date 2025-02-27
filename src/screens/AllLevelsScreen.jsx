@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {
     View,
@@ -30,15 +31,15 @@ const levelBlocks = [
 ];
 
 const mapLines = [
-    { id: 1, source: require('../assets/icons/map/Line 1.png'), left: 81, top: 155, bottom: 110 },
-    { id: 2, source: require('../assets/icons/map/Line 2.png'), left: 198, top: 154, bottom: 232 },
-    { id: 3, source: require('../assets/icons/map/Line 3.png'), left: 320, top: 253, bottom: 132 },
-    { id: 4, source: require('../assets/icons/map/Line 4.png'), left: 405, top: 118, bottom: 116 },
-    { id: 5, source: require('../assets/icons/map/Line 5.png'), left: 465, top: 106, bottom: 350 },
-    { id: 6, source: require('../assets/icons/map/Line 6.png'), left: 602, top: 118, bottom: 168 },
-    { id: 7, source: require('../assets/icons/map/Line 7.png'), left: 620, top: 300, bottom: 112 },
-    { id: 8, source: require('../assets/icons/map/Line 8.png'), left: 769, top: 114, bottom: 168 },
-    { id: 9, source: require('../assets/icons/map/Line 9.png'), left: 810, top: 248, bottom: 136 },
+    { id: 1, source: require('../assets/icons/map/Line1.png'), left: 81, top: 155, bottom: 110 },
+    { id: 2, source: require('../assets/icons/map/Line2.png'), left: 198, top: 154, bottom: 232 },
+    { id: 3, source: require('../assets/icons/map/Line3.png'), left: 320, top: 253, bottom: 132 },
+    { id: 4, source: require('../assets/icons/map/Line4.png'), left: 405, top: 118, bottom: 116 },
+    { id: 5, source: require('../assets/icons/map/Line5.png'), left: 465, top: 106, bottom: 350 },
+    { id: 6, source: require('../assets/icons/map/Line6.png'), left: 602, top: 118, bottom: 168 },
+    { id: 7, source: require('../assets/icons/map/Line7.png'), left: 620, top: 300, bottom: 112 },
+    { id: 8, source: require('../assets/icons/map/Line8.png'), left: 769, top: 114, bottom: 168 },
+    { id: 9, source: require('../assets/icons/map/Line9.png'), left: 810, top: 248, bottom: 136 },
 ];
 
 const AllLevelsScreen = () => {
